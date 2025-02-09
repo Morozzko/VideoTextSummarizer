@@ -12,7 +12,7 @@ import requests
 # small – лучшее качество при умеренной скорости.
 # medium – высокая точность, но медленнее.
 # large – максимальное качество, но требует больше ресурсов.
-WHISPER_MODEL = "large"
+WHISPER_MODEL = "small"
 OLLAMA_MODEL = "deepseek-r1:70b"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
