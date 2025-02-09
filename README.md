@@ -37,7 +37,7 @@ brew install ffmpeg
 Скачивание и установка **Ollama** с [официального сайта](https://ollama.com).
 Затем загрузка модели LLaMA 3:
 ```bash
-ollama pull llama3
+ollama run llama3.3
 ```
 
 ### 4️⃣ Запуск сервиса

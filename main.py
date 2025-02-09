@@ -7,7 +7,12 @@ import whisper
 import requests
 
 # Константы
-WHISPER_MODEL = "base"
+# tiny – очень быстрая, но низкое качество.
+# base – чуть лучше, но всё ещё компромисс между скоростью и точностью.
+# small – лучшее качество при умеренной скорости.
+# medium – высокая точность, но медленнее.
+# large – максимальное качество, но требует больше ресурсов.
+WHISPER_MODEL = "large"
 OLLAMA_MODEL = "deepseek-r1:70b"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 
@@ -53,14 +58,14 @@ def download_and_transcribe(url: str) -> str:
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
-        
+
         audio_file = os.path.join(tmpdirname, "temp.mp3")
         if not os.path.exists(audio_file):
             files = os.listdir(tmpdirname)
             if len(files) == 0:
                 raise Exception("Не удалось скачать аудиофайл")
             audio_file = os.path.join(tmpdirname, files[0])
-        
+
         result = model.transcribe(audio_file)
         return result.get("text", "")
 
@@ -180,4 +185,4 @@ async def summarize_endpoint(payload: dict):
         summary = summarize_text(text)
         return {"summary": summary}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e)) 
+        raise HTTPException(status_code=500, detail=str(e))
